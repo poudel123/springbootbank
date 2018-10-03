@@ -34,18 +34,28 @@ public class CustomerController {
 		return "index";
 	}
 
-	@RequestMapping("/loginCustomer")
+	/*@RequestMapping("/loginCustomer")
 	public String getLoginCustomerPage(Model model) {
 		model.addAttribute("customer", new Customer());
 		return "loginCustomer";
 	}
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public String authenticateCustomer(@RequestParam int customerId, @RequestParam String password, HttpSession session,
+			HttpServletRequest request) {
+		Customer cust = customerService
+				.authenticate(new Customer(null,customerId,  password, null, null, null, null));
+
+		session = request.getSession();
+		session.setAttribute("customer", cust);
+		return "index";
+
+	}*/
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String displayDetails(HttpSession session, HttpServletRequest request, @ModelAttribute Customer customer, @RequestParam int customerid, @RequestParam String password) {
+	public String displayDetails(HttpSession session, HttpServletRequest request, @ModelAttribute Customer customer) {
 		session = request.getSession();
 		System.out.println(customer);
-		 Customer cust = new Customer(null, customerid, password, null, null,
-		 null, null);
+		// Customer cust = new Customer(null, customerid, password, null, null, null, null);
 		Customer authenticatedCustomer = null;
 		authenticatedCustomer = customerService.authenticate(customer);
 		session.setAttribute("customer", authenticatedCustomer);
