@@ -2,7 +2,7 @@ package com.capgemini.bankappcheck.exception;
 
 import java.util.Arrays;
 
-public class PayeeAccountNotFoundException extends Exception 
+public class PayeeAccountNotFoundException extends RuntimeException 
 {
 
 	public PayeeAccountNotFoundException(String message) {

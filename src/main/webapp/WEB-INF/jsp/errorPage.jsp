@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
-
-	<h3>${requestScope.passwordFailed}</h3>
-
-	
+WRONG CREDENTIALS!DONT TRY AGAIN
 </body>
 </html>

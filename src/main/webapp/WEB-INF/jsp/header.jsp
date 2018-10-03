@@ -53,7 +53,7 @@
      		<li><a href="displayDetails"><span class="glyphicon glyphicon-user">${sessionScope.customer.customerName}</span></a></li>
 		</c:if>
 	  	<c:if test="${sessionScope.customer.customerName!=null}">
-     		<li><a href="logout"><span class="glyphicon glyphicon-user"></span>Log out</a></li>
+     		<li><a href="logout.do"><span class="glyphicon glyphicon-user"></span>Log out</a></li>
 		</c:if>
 	      
 	      

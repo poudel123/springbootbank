@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
-
-	<h3>${requestScope.passwordFailed}</h3>
-
-	
+<h3>${requestScope.payeenotFound}</h3>
 </body>
 </html>

@@ -8,6 +8,6 @@ import com.capgemini.bankappcheck.exception.ChangePasswordFailedException;
 public interface CustomerRepository 
 {
 	public Customer authenticate(Customer customer) throws DataAccessException;
-	public Customer updateProfile(Customer customer);
+	public Customer updateProfile(Customer customer) throws DataAccessException;
 	public boolean updatePassword(Customer customer, String oldPassword, String newPassword)throws ChangePasswordFailedException;
 }

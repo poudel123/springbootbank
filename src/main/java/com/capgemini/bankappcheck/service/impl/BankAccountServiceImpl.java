@@ -1,6 +1,7 @@
 package com.capgemini.bankappcheck.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.bankappcheck.exception.LowBalanceException;
@@ -50,12 +51,31 @@ public class BankAccountServiceImpl implements BankAccountService
 	@Override
 	public boolean fundTransfer(long fromAcc, long toAcc, double amount) throws PayeeAccountNotFoundException,LowBalanceException {
 		System.out.println("i am in fund transfer service impl"+toAcc);
-		if(bankAccountRepository.getBalance(fromAcc)<amount)
-		{
-			throw new LowBalanceException("amount insufficient");
+		
+		try {
+			
+			if(bankAccountRepository.updateBalance(fromAcc, -1*amount))
+			{
+				if(bankAccountRepository.updateBalance(toAcc, amount))
+				{
+					return true;
+				}
+			}
+			return false;
+		}catch(DataAccessException e) {
+			
 		}
-		else if(bankAccountRepository.getBalance(toAcc)==-1) {
+		
+		
+		
+		
+		if(bankAccountRepository.getBalance(toAcc)==-1)
+		{
 			throw new PayeeAccountNotFoundException("incorrect account");
+
+		}
+		else if(bankAccountRepository.getBalance(fromAcc)<amount) {
+			throw new LowBalanceException("amount insufficient");
 		}
 		
 		else if(bankAccountRepository.updateBalance(fromAcc, -1*amount))
@@ -65,6 +85,7 @@ public class BankAccountServiceImpl implements BankAccountService
 				return true;
 			}
 		}
-		throw new PayeeAccountNotFoundException("Fund transfer unsuccessfull");
+		//throw new PayeeAccountNotFoundException("Fund transfer unsuccessfull");
+		return false;
 	}
 }
